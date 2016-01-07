@@ -3,6 +3,8 @@ package com.alibaba.dt.travel.importdata;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -40,18 +42,19 @@ public class ImportAdministrativeRegion {
 	Dataset dataset;
 	int count=0;
 	
-	public void run1(){
+	public void run(){
 		getOntology();
 		parseXML();
 		try {
 			//dataOntology.write(new BufferedWriter(new OutputStreamWriter(new FileOutputStream("output.ttl"), true)));
-			dataOntology.write(new FileOutputStream("output.ttl"),"TURTLE");
+			dataOntology.write(new FileOutputStream("output/AdministrativeRegion_Zhejiang.ttl"),"TURTLE");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	public void run(){
+	/*
+	public void run1(){
 		getOntology1();
 		parseXML();
 	}
@@ -75,11 +78,12 @@ public class ImportAdministrativeRegion {
 		hasRegionName = travelOntology.getProperty(prefix+"hasRegionNameValue");
 		hasParentRegion = travelOntology.getProperty(prefix+"hasParentRegion");
 	}
+	*/
 	//load ontmodel
 	private void getOntology(){
 		dataOntology = ModelFactory.createOntologyModel();
 		travelOntology = ModelFactory.createOntologyModel();
-		travelOntology.read("旅游-20151210.ttl");
+		travelOntology.read("ontology/旅游-20151210.ttl");
 		provClass = travelOntology.getOntClass(prefix+"Province");
 		cityClass = travelOntology.getOntClass(prefix+"City");
 		townClass = travelOntology.getOntClass(prefix+"Town");
@@ -100,7 +104,7 @@ public class ImportAdministrativeRegion {
 		china.addLiteral(hasRegionName,"中国");
 		
 		//load xml file
-		File file = new File("region_all.xml");
+		File file = new File("input/region_all.xml");
 		DocumentBuilder db = null;
 		DocumentBuilderFactory dbf = null;
 		try{
@@ -130,6 +134,7 @@ public class ImportAdministrativeRegion {
 		
 
 		String name="";
+		String encodedName = "";
 		String code="";
 		int level=-1;
 		NodeList childNodes=null;
@@ -140,6 +145,12 @@ public class ImportAdministrativeRegion {
 			Node tmpAttr = attrList.item(i);
 			if("name".equals(tmpAttr.getNodeName())){
 				name = tmpAttr.getFirstChild().getNodeValue();
+				try {
+					encodedName = URLEncoder.encode(name,"UTF-8");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				continue;
 			}
 			if("code".equals(tmpAttr.getNodeName())){
@@ -155,23 +166,23 @@ public class ImportAdministrativeRegion {
 				continue;
 			}
 		}
-		//if(level==1&&!("浙江".equals(name)))
-		//	return;
+		if(level==1&&!("浙江".equals(name)))
+			return;
 		switch(level){
 		case 1:
-			ind = dataOntology.createIndividual(prefix+"region_"+code, provClass);
+			ind = dataOntology.createIndividual(prefix+encodedName, provClass);
 			break;
 		case 2:
-			ind = dataOntology.createIndividual(prefix+"region_"+code, cityClass);
+			ind = dataOntology.createIndividual(prefix+encodedName, cityClass);
 			break;
 		case 3:
-			ind = dataOntology.createIndividual(prefix+"region_"+code, townClass);
+			ind = dataOntology.createIndividual(prefix+encodedName, townClass);
 			break;
 		case 4:
-			ind = dataOntology.createIndividual(prefix+"region_"+code, countyClass);
+			ind = dataOntology.createIndividual(prefix+encodedName, countyClass);
 			break;
 		case 5:
-			ind = dataOntology.createIndividual(prefix+"region_"+code, villageClass);
+			ind = dataOntology.createIndividual(prefix+encodedName, villageClass);
 			break;
 		default:
 			System.out.println("unknown region level: "+level);
