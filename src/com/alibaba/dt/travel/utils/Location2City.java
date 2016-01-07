@@ -10,18 +10,17 @@ public class Location2City {
 	public static String LatLon2City(double lat, double lon){
 		String param = "ak="+ak+"&callback=renderReverse&location="+lat+","+lon+"&output=json";
 		String result = CustomizedHttpRequest.sendGet(urlPrefix, param);
+		String city = null;
 		try {
 			JSONObject resultJson = new JSONObject(result);
 			String tmp = resultJson.getString("status");
-			System.out.println(tmp);
-			String city = resultJson.getJSONObject("result").getJSONObject("addressComponent").getString("city");
-			System.out.println(city);
+			city = resultJson.getJSONObject("result").getJSONObject("addressComponent").getString("district");
 			//错误处理还没写
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return result;
+		return city;
 	}
 	
 	public String Address2City(String address){
