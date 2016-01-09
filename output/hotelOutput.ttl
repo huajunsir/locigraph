@@ -1,0 +1,66 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://alibaba.com/dt/ontology/travel#%E5%8D%9A%E7%BA%B3%E9%85%92%E5%BA%97>
+        <http://alibaba.com/dt/ontology/travel#hasAddressValue>
+                "武侯区一环路南一段2号（近九眼桥酒吧街，四川川音学院）" ;
+        <http://alibaba.com/dt/ontology/travel#hasAirConditionerOrNot>
+                true ;
+        <http://alibaba.com/dt/ontology/travel#hasHotelComment>
+                [ a       <http://alibaba.com/dt/ontology/travel#Comment> ;
+                  <http://alibaba.com/dt/ontology/travel#hasCommentCountValue>
+                          "215"^^xsd:int ;
+                  <http://alibaba.com/dt/ontology/travel#hasScoreValue>
+                          "4"^^xsd:int
+                ] ;
+        <http://alibaba.com/dt/ontology/travel#hasHoteltypeValue>
+                "\\N" ;
+        <http://alibaba.com/dt/ontology/travel#hasIntroductionValue>
+                "美食方面更是惊喜连连，各大名吃小吃汇集一堂宜宾烤鱼，滋味烤鱼，海鲜烧烤、抓抓餐、盐帮菜、吴铭火锅、数不胜数，居然还有成都小有名气的“老三样”餐馆，这家的菜不出堂的哦，喜欢美食的有口福了。" ;
+        <http://alibaba.com/dt/ontology/travel#hasLatValue>
+                "30.636073" ;
+        <http://alibaba.com/dt/ontology/travel#hasLonValue>
+                "104.082161" ;
+        <http://alibaba.com/dt/ontology/travel#hasNameValue>
+                "博纳酒店" ;
+        <http://alibaba.com/dt/ontology/travel#hasParentLocation>
+                "武侯区" ;
+        <http://alibaba.com/dt/ontology/travel#hasParkOrNot>
+                true ;
+        <http://alibaba.com/dt/ontology/travel#hasTelNumberValue>
+                "(028)85294038" ;
+        <http://alibaba.com/dt/ontology/travel#hasWifiOrNot>
+                true .
+
+<http://alibaba.com/dt/ontology/travel#%E9%9D%99%E9%91%AB%E5%95%86%E5%8A%A1%E5%AE%BE%E9%A6%86%E8%B6%B5%E7%AA%81%E6%B3%89%E5%BA%97>
+        <http://alibaba.com/dt/ontology/travel#hasAddressValue>
+                "市中区共青团路12号（趵突泉北门西50米，五龙潭南门正对面）" ;
+        <http://alibaba.com/dt/ontology/travel#hasAirConditionerOrNot>
+                true ;
+        <http://alibaba.com/dt/ontology/travel#hasHotelComment>
+                [ a       <http://alibaba.com/dt/ontology/travel#Comment> ;
+                  <http://alibaba.com/dt/ontology/travel#hasCommentCountValue>
+                          "339"^^xsd:int ;
+                  <http://alibaba.com/dt/ontology/travel#hasScoreValue>
+                          "4"^^xsd:int
+                ] ;
+        <http://alibaba.com/dt/ontology/travel#hasHoteltypeValue>
+                "\\N" ;
+        <http://alibaba.com/dt/ontology/travel#hasIntroductionValue>
+                "酒店基本还可以！" ;
+        <http://alibaba.com/dt/ontology/travel#hasLatValue>
+                "29.555375" ;
+        <http://alibaba.com/dt/ontology/travel#hasLonValue>
+                "103.76133" ;
+        <http://alibaba.com/dt/ontology/travel#hasNameValue>
+                "静鑫商务宾馆趵突泉店" ;
+        <http://alibaba.com/dt/ontology/travel#hasParentLocation>
+                "市中区" ;
+        <http://alibaba.com/dt/ontology/travel#hasParkOrNot>
+                true ;
+        <http://alibaba.com/dt/ontology/travel#hasTelNumberValue>
+                "(0531)58963888" ;
+        <http://alibaba.com/dt/ontology/travel#hasWifiOrNot>
+                true .
